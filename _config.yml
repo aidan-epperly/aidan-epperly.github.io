@@ -73,7 +73,7 @@ author:
       url: "https://github.com/aidan-epperly"
 
 head_scripts:
-  - /_includes/mathy.js
+  - /assets/js/math.js
 
 footer:
   links:
