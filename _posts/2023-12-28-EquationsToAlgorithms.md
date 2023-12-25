@@ -4,7 +4,7 @@ excerpt_separator: "<!--more-->"
 categories:
   - Blog
 permalink: "eqtoalg"
-tags: Linear Algebra, Algorithms, Polar Decomposition
+tags: Linear-Algebra, Algorithms, Polar-Decomposition
 mathjax: true
 ---
 
