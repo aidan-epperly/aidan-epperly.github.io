@@ -17,7 +17,7 @@ With matrices, there is a natural notion of nonnegativity: positive semidefinite
 The polar decomposition of a matrix $$A$$ is given by two matrices $$U$$ and $$R$$ such that $$A = UR$$, $$U$$ is orthogonal, and $$R$$ is positive semidefinite. One method of computing such a decomposition would be to find some way of computing $$U$$ and then multiplying $$A$$ by $$U^T$$ to yield $$U^T A = R.$$ An algorithm for computing $$U$$ if $$A$$ is invertible is given by the following iteration. Start with $$U_0 = A$$ and let
 
 $$
-U_{i+1} = \frac{1}{2}(U + U^{-T}).
+U_{i+1} = \frac{1}{2}(U_i + U_i^{-T}).
 $$
 
 You might be asking where a formula like this comes from. The answer can be found in the inverse transpose $$-T.$$ If the matrix $$U_i$$ was actually orthogonal, then $$U_i^{-T} = U_i$$ and thus $$U_{i+1} = U_i.$$ In fact, this last equation is *only* true if $$U_i$$ is orthogonal, so orthogonal matrices are the only *fixed points* for this iteration. Without this property, we would have no hope of this algorithm ever computing an orthogonal matrix. Now, we have two things left to show. The first is that $$U_{i+1}$$ must always be "more orthogonal" than $$U_i$$ and the second is that the $$U_i$$'s must be converging to $$U$$, the orthogonal term from the decomposition.
