@@ -48,11 +48,11 @@ As with diagonal matrices, many matrix operations are much cheaper to compute wi
 
 ## Banded Matrices
 
-Banded matrices can be thought of as a generalization of diagonal matrices where we are allowed to place values on other diagonals. Technically every matrix is "banded" so generally, we want our matrix to have only a small number of bands. An $$n \times n$$ matrix has $$n + 1$$ diagonals. For convenience, we will call the main diagonal the $$0$$th diagonal. The diagonal that starts at $$A_{1i} the $$i-1$$st diagonal and the diagonal that starts at $$A_{i1}$$ is called the $$-i+1$$st diagonal. The $$1$$st and $$-1$$st diagonal are called the super and subdiagonal respectively.
+Banded matrices can be thought of as a generalization of diagonal matrices where we are allowed to place values on other diagonals. Technically every matrix is "banded" so generally, we want our matrix to have only a small number of bands. An $$n \times n$$ matrix has $$n + 1$$ diagonals. For convenience, we will call the main diagonal the $$0$$th diagonal. The diagonal that starts at $$A_{1i}$$ the $$i-1$$st diagonal and the diagonal that starts at $$A_{i1}$$ is called the $$-i+1$$st diagonal. The $$1$$st and $$-1$$st diagonal are called the super and subdiagonal respectively.
 
 ### Tridiagonal Matrices
 
-A commonly used banded matrix is a tridiagonal matrix. This is a matrix that only has nonzero entries on diagonals $$-1$$, $$0$$, and $$1$$. In other words, there are only nonzero entries on the main, sub, and super diagonals of the matrix. Below is such a matrix.
+A commonly used banded matrix is a tridiagonal matrix. This is a matrix that only has nonzero entries on diagonals $$-1$$, $$0$$, and $$1$$. In other words, there are only nonzero entries on the main, sub, and super diagonals of the matrix. Below is such a matrix:
 
 $$
 \begin{pmatrix}
