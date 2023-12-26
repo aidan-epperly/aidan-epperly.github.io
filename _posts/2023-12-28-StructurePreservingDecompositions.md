@@ -19,13 +19,13 @@ Throughout this blog post I will us the following notation and conventions:
 
  - The letters $$i$$, $$j$$, $$k$$, $$n$$, and $$m$$ will be used exclusively for indexing or to denote the size of matrices.
  - All matrices will be assumed to be real unless otherwise stated, though many if not all of the decompositions will work for complex matrices (if you swap the use of the transpose for the Hermitian transpose).
- - For general matrices, upper case letters near the beginning of the alphabet will be used such as $$A$$, $$B$$, and $$C$$. These matrices are indexed by rows first and then columns. So, to get the element in the $$i$$th row and $$j$$th column it would be written $$A_{ij}$$ and the whole $$i$$th row would be denoted $$A_{i*}$$. 
- - If the matrix should be thought of as a list of its column vectors, upper case letters near the end of the alphabet will be used such as $$X$$, $$Y$$, and $$Z$$. These matrices are indexed first by columns and then rows. So, to get the element in the $$i$$th row and $$j$$th column it would be written $$X_{ji}$$ and the whole $$j$$th column would be denoted $$X_{j*}$$.
+ - For general matrices, upper case letters near the beginning of the alphabet will be used, such as $$A$$, $$B$$, and $$C$$. These matrices are indexed by rows first and then columns. So, to get the element in the $$i$$th row and $$j$$th column it would be written $$A_{ij}$$ and the whole $$i$$th row would be denoted $$A_{i*}$$. 
+ - If the matrix should be thought of as a list of its column vectors, upper case letters near the end of the alphabet will be used, such as $$X$$, $$Y$$, and $$Z$$. These matrices are indexed first by columns and then rows. So, to get the element in the $$i$$th row and $$j$$th column it would be written $$X_{ji}$$ and the whole $$j$$th column would be denoted $$X_{j*}$$.
  - The letter $$D$$ will be used only for diagonal matrices.
  - The letters $$U$$, $$V$$, $$W$$, and $$Q$$ will exclusively be used for orthogonal matrices.
- - The letter $$I$$ will always denote the identity matrix. The dimension of this matrix will often be infered from context, but may be denoted using a subscript $$I_n$$.
- - For row vectors, lower case letters near the beginning of the alphabet will be used such as $$a$$, $$b$$, and $$c$$.
- - For column vectors, lower case letters near the end of the alphabet will be used such as $$x$$, $$y$$, and $$z$$.
+ - The letter $$I$$ will always denote the identity matrix. The dimension of this matrix will often be inferred from context, but may be denoted using a subscript $$I_n$$.
+ - For row vectors, lower case letters near the beginning of the alphabet will be used, such as $$a$$, $$b$$, and $$c$$.
+ - For column vectors, lower case letters near the end of the alphabet will be used, such as $$x$$, $$y$$, and $$z$$.
  - The symbols $$e_1,e_2,\dots,e_n$$ will be used to denote the $$n$$ standard basis vectors.
 
 # Simple Matrices
@@ -38,7 +38,7 @@ I debated including this at all, but it must be said that a square matrix is oft
 
 ## Diagonal Matrices
 
-Diagonal matrices are the simplest possible matrices. They need not be square, but they are often square. The defining proerty of a diagonal matrix $$D$$ is that $$D_{ij} = 0$$ if $$i \neq j$$. A diagonal matrix is thus uniquely defined by the values on its main diagonal, and thus we sometimes use the notation $$\mathrm{diag}(x)$$ to denote the diagonal matrix with diagonal $$x$$.
+Diagonal matrices are the simplest possible matrices. They need not be square, but they are often square. The defining property of a diagonal matrix $$D$$ is that $$D_{ij} = 0$$ if $$i \neq j$$. A diagonal matrix is thus uniquely defined by the values on its main diagonal, and thus we sometimes use the notation $$\mathrm{diag}(x)$$ to denote the diagonal matrix with diagonal $$x$$.
 
 Numerous operations are extremely easy to compute with diagonal matrices. Inverting a diagonal matrix $$D$$, for instance, can be done trivially by just replacing every diagonal element $$d_i$$ with $$1/d_i$$. We will discuss more cases later.
 
@@ -50,7 +50,7 @@ As with diagonal matrices, many matrix operations are much cheaper to compute wi
 
 ## Banded Matrices
 
-Banded matrices can be thought of as a generalization of diagonal matrices where we are allowed to place values on other diagonals. Technically every matrix is "banded" so generally, we want our matrix to have only a small number of bands. An $$n \times n$$ matrix has $$2n - 1$$ diagonals. For convenience, we will call the main diagonal the $$0$$th diagonal. The diagonal that starts at $$A_{1i}$$ the $$i-1$$st diagonal and the diagonal that starts at $$A_{i1}$$ is called the $$-i+1$$st diagonal. The $$1$$st and $$-1$$st diagonal are called the super and subdiagonal respectively.
+Banded matrices can be thought of as a generalization of diagonal matrices where we are allowed to place values on other diagonals. Technically every matrix is "banded" so generally, we want our matrix to have only a small number of bands. An $$n \times n$$ matrix has $$2n - 1$$ diagonals. For convenience, we will call the main diagonal the $$0$$th diagonal. The diagonal that starts at $$A_{1i}$$ is called the $$i-1$$st diagonal, and the diagonal that starts at $$A_{i1}$$ is called the $$-i+1$$st diagonal. The $$1$$st and $$-1$$st diagonal are called the super and subdiagonal respectively.
 
 ### Tridiagonal Matrices
 
@@ -117,4 +117,46 @@ Along with the diagonal matrix, orthogonal matrices should be thought of as the 
 
 Suppose we have a vector $$x$$. We can ask the question: does there exist a matrix $$Q$$ such that $$Qx = e_1$$? Well, if $$\|x\| \neq 1$$ the answer *must* be no as $$Q$$ is an isometry. But, if we revise our question to ask if there is a $$Q$$ mapping $$x$$ to $$\|x\| e_1$$ then the answer is yes! One such choice of $$Q$$ is the Householder reflector.
 
-The Householder reflector $$H_u$$ is an orthogonal matrix that reflects a vector across the line spanned by the unit vector $$u$$. It is computed using the simple formula $$H_u = I - 2 u u^T$$ where $$u$$ is a unit vector. In order to map the vector $$x$$ to the vector $$y$$ of the same length, we let $$v = \frac{x + y}{2}$$ be the average of the two vectors and then define $$u = \frac{v}{\|v\|}$$ as the unit vector in the direction of $$v$$. 
+The Householder reflector $$H_u$$ is an orthogonal matrix that reflects a vector across the line spanned by the unit vector $$u$$. It is computed using the simple formula $$H_u = I - 2 u u^T$$ where $$u$$ is a unit vector. In order to map the vector $$x$$ to the vector $$y$$ of the same length, we let $$v = \frac{x + y}{2}$$ be the average of the two vectors and then define $$u = \frac{v}{\|v\|}$$ as the unit vector in the direction of $$v$$.
+
+# Structure Revealing Decompositions
+
+Now that we have extensively discussed what I mean when I say a matrix is simple, we can finally talk about some structure revealing decompositions. I am not going to go very deep into how these decompositions are actually computed, but a cursory Google search should yield many implementations.
+
+## Solving Linear Systems
+
+### LU Decomposition
+
+If you have ever solved a linear system using Gaussian elimination, you have implicitly computed the LU decomposition. An invertible matrix $$A$$ can be decomposed into a product $$A = LU$$ for $$L$$ a lower triangular matrix and $$U$$ an upper triangular matrix (this is the one time we will break the convention that $$U$$ is orthgonal). Most methods of computing the $$LU$$ factorization will result in the $$L$$ matrix have only ones on the main diagonal. Such a matrix is called *unitriangular*.
+
+To compute $$L$$ and $$U$$, we can just do Gaussian elimination to create $$U$$, recording the weights in the matrix $$L$$.
+
+If $$L$$ is chosen to be unitriangular, then it can be computed simply by multiplying every element of $$L$$ below the diagonal by $$-1$$. So, for instance
+
+$$
+\begin{pmatrix}
+1 & 0 \\
+a & 1
+\end{pmatrix}^{-1} = \begin{pmatrix}
+1 & 0 \\
+-a & 1
+\end{pmatrix}.
+$$
+
+The LU decomposition is not generally stable and should be avoided. However, a slight edit can be made to make it much more stable.
+
+#### PLU Decomposition
+
+The PLU decomposition decomposes a matrix $$A$$ into a product $$PLU$$ for $$P$$ a *permutation matrix* and $$LU$$ as above. A permutation matrix is an orthogonal matrix where every column has exactly one nonzero entry whose value is $$1$$. The permutation matrix comes from *pivoting*---the act of switching two rows of the matrix while computing the decomposition.
+
+Pivoting allows us to make the computation of the LU much more stable by always moving the row with the largest first entry up. Essentially, we choose to make the diagonal of $$U$$ as large as possible in order to avoid dividing by a number close to zero.
+
+It is generally $$O(n^3)$$ to compute the $$PLU$$.
+
+#### LDU Decomposition, Inverting a Matrix, and the Determinant
+
+The matrix $$U$$ in the LU and PLU is not unitriangular, but its diagonal cannot have any entries that are zero. So, if we let $$D$$ be the diagonal portion of the matrix $$U$$, we can get a new decomposition $$LDD^{-1}U$$ from the $$LU$$. This is called the $$LDU$$ decomposition. In this decomposition, both $$L$$ and $$U$$ are unitriangular and thus *extremely* easy to invert by just multiplying the nondiagonal entries by $$-1$$.
+
+So, given the $$LDU$$ decomposition of $$A$$, we can compute the inverse of $$A$$ using $$A^{-1} = (LDU)^{-1} = U^{-1} D^{-1} L^{-1}$$. All of the latter matrix inverses are trivial.
+
+We can do another trick to compute the determinant of $$A$$. Namely, that $$\det(A) = \det(LDU) = \det(L)\det(D)\det(U) = \det(D)$$, as the determinant of a triangular matrix is just the product of the diagonal.
