@@ -171,13 +171,11 @@ $$
 \det(A) = \det(LDU) = \det(L)\det(D)\det(U) = \det(D)
 $$
 
-as the determinant of a triangular matrix is the product of its diagonal elements.
+as the determinant of a triangular matrix is just the product of the diagonal. This is indescribably faster than the novel algorithm for computing the determinant which is $$O(n!)$$ and also more stable (assuming we use the PLDU).
 
 #### Storing the PLDU
 
 Because $$L$$ and $$U$$ are unitriangular, their diagonal need not be stored as it will always be $$1$$. So, it turns out we can store the LDU part of the PLDU in a single $$n\times n$$ matrix. The matrix $$P$$ can be stored as a single list of numbers from $$1$$ to $$n$$ using the one line representation of a permutation. Thus, the PLDU requires only $$n$$ more numbers to store than the original matrix. However, if special care is not taken, the PLDU will not be sparse, even if the original matrix is sparse.
-
-as the determinant of a triangular matrix is just the product of the diagonal. This is indescribably faster than the novel algorithm for computing the determinant which is $$O(n!)$$ and also more stable (assuming we use the PLDU).
 
 ### Cholesky Decomposition
 
