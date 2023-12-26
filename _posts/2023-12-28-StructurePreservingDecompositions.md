@@ -168,8 +168,10 @@ The matrix $$U$$ in the LU and PLU is not in generaly unitriangular, but its dia
 We can do another trick to compute the determinant of $$A$$. Namely, that
 
 $$
-\det(A) = \det(LDU) = \det(L)\det(D)\det(U) = \det(D),
+\det(A) = \det(LDU) = \det(L)\det(D)\det(U) = \det(D)
 $$
+
+as the determinant of a triangular matrix is the product of its diagonal elements.
 
 #### Storing the PLDU
 
