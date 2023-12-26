@@ -119,6 +119,14 @@ Suppose we have a vector $$x$$. We can ask the question: does there exist a matr
 
 The Householder reflector $$H_u$$ is an orthogonal matrix that reflects a vector across the line spanned by the unit vector $$u$$. It is computed using the simple formula $$H_u = I - 2 u u^T$$ where $$u$$ is a unit vector. In order to map the vector $$x$$ to the vector $$y$$ of the same length, we let $$v = \frac{x + y}{2}$$ be the average of the two vectors and then define $$u = \frac{v}{\|v\|}$$ as the unit vector in the direction of $$v$$.
 
+## Symmetric Matrices
+
+A matrix $$A$$ is symmetric if $$A = A^T$$. Symmetric matrices are wonderful mathematical objects with a number of excellent properties. I have taken entire classes where we never worked with nonsymmetric matrices. One particularly useful property of a symmetric matrix is that all of its eigenvalues must be real numbers.
+
+### Positive Definite Matrices
+
+A symmetric matrix $$A$$ is said to be positive definite if all of its eigenvalues are positive. Alternatively and equivalently, for all nonzero vectors $$x$$, the real number $$x^T A x > 0$$. So, in particular, the diagonal element $$A_{ii} = e_i^T A e_i > 0$$, which implies that the diagonal of $$A$$ is positive. If we replace every use of $$>$$ in the preceeding discussion with $$\geq$$, then we call such a matrix *positive semidefinite*.
+
 # Structure Revealing Decompositions
 
 Now that we have extensively discussed what I mean when I say a matrix is simple, we can finally talk about some structure revealing decompositions. I am not going to go very deep into how these decompositions are actually computed, but a cursory Google search should yield many implementations.
@@ -127,11 +135,9 @@ Now that we have extensively discussed what I mean when I say a matrix is simple
 
 ### LU Decomposition
 
-If you have ever solved a linear system using Gaussian elimination, you have implicitly computed the LU decomposition. An invertible matrix $$A$$ can be decomposed into a product $$A = LU$$ for $$L$$ a lower triangular matrix and $$U$$ an upper triangular matrix (this is the one time we will break the convention that $$U$$ is orthgonal). Most methods of computing the $$LU$$ factorization will result in the $$L$$ matrix have only ones on the main diagonal. Such a matrix is called *unitriangular*.
+If you have ever solved a linear system using Gaussian elimination, you have implicitly computed the LU decomposition. An invertible matrix $$A$$ can be decomposed into a product $$A = LU$$ for $$L$$ a lower triangular matrix and $$U$$ an upper triangular matrix (this is the one time we will break the convention that $$U$$ is orthgonal). Most methods of computing the $$LU$$ factorization will result in the $$L$$ matrix having only ones on the main diagonal. Such a matrix is called *unitriangular*.
 
-To compute $$L$$ and $$U$$, we can just do Gaussian elimination to create $$U$$, recording the weights in the matrix $$L$$.
-
-If $$L$$ is chosen to be unitriangular, then it can be computed simply by multiplying every element of $$L$$ below the diagonal by $$-1$$. So, for instance
+To compute $$L$$ and $$U$$, we can just do Gaussian elimination to create $$U$$, recording the weights in the matrix $$L$$. If $$L$$ is chosen to be unitriangular, then it can be inverted simply by multiplying every element of $$L$$ below the diagonal by $$-1$$. So, for instance
 
 $$
 \begin{pmatrix}
@@ -145,18 +151,34 @@ $$
 
 The LU decomposition is not generally stable and should be avoided. However, a slight edit can be made to make it much more stable.
 
+It is generally $$O(n^3)$$ to compute the $$LU$$.
+
 #### PLU Decomposition
 
 The PLU decomposition decomposes a matrix $$A$$ into a product $$PLU$$ for $$P$$ a *permutation matrix* and $$LU$$ as above. A permutation matrix is an orthogonal matrix where every column has exactly one nonzero entry whose value is $$1$$. The permutation matrix comes from *pivoting*---the act of switching two rows of the matrix while computing the decomposition.
 
 Pivoting allows us to make the computation of the LU much more stable by always moving the row with the largest first entry up. Essentially, we choose to make the diagonal of $$U$$ as large as possible in order to avoid dividing by a number close to zero.
 
-It is generally $$O(n^3)$$ to compute the $$PLU$$.
+It is generally $$O(n^3)$$ to compute the $$PLU$$ and it requires the same number of floating point operations as the $$LU$$ but more floating point compares and more memory operations. However, it is essentially always preferable to compute the $$PLU$$. From now on, if I mention the $$LU$$ decomposition, you should assume I actually mean the $$PLU$$ unless I specify.
 
 #### LDU Decomposition, Inverting a Matrix, and the Determinant
 
-The matrix $$U$$ in the LU and PLU is not unitriangular, but its diagonal cannot have any entries that are zero. So, if we let $$D$$ be the diagonal portion of the matrix $$U$$, we can get a new decomposition $$LDD^{-1}U$$ from the $$LU$$. This is called the $$LDU$$ decomposition. In this decomposition, both $$L$$ and $$U$$ are unitriangular and thus *extremely* easy to invert by just multiplying the nondiagonal entries by $$-1$$.
+The matrix $$U$$ in the LU and PLU is not in generaly unitriangular, but its diagonal cannot have any entries that are zero. So, if we let $$D$$ be the diagonal portion of the matrix $$U$$, we can get a new decomposition $$LDD^{-1}U$$ from the $$LU$$. This is called the $$LDU$$ decomposition. In this decomposition, both $$L$$ and $$U$$ are unitriangular and thus *extremely* easy to invert by just multiplying the nondiagonal entries by $$-1$$. So, given the $$LDU$$ decomposition of $$A$$, we can compute the inverse of $$A$$ using $$A^{-1} = (LDU)^{-1} = U^{-1} D^{-1} L^{-1}$$. All of the latter matrix inverses are trivial.
 
-So, given the $$LDU$$ decomposition of $$A$$, we can compute the inverse of $$A$$ using $$A^{-1} = (LDU)^{-1} = U^{-1} D^{-1} L^{-1}$$. All of the latter matrix inverses are trivial.
+We can do another trick to compute the determinant of $$A$$. Namely, that
 
-We can do another trick to compute the determinant of $$A$$. Namely, that $$\det(A) = \det(LDU) = \det(L)\det(D)\det(U) = \det(D)$$, as the determinant of a triangular matrix is just the product of the diagonal.
+$$
+\det(A) = \det(LDU) = \det(L)\det(D)\det(U) = \det(D),
+$$
+
+#### Storing the PLDU
+
+Because $$L$$ and $$U$$ are unitriangular, their diagonal need not be stored as it will always be $$1$$. So, it turns out we can store the LDU part of the PLDU in a single $$n\times n$$ matrix. The matrix $$P$$ can be stored as a single list of numbers from $$1$$ to $$n$$ using the one line representation of a permutation. Thus, the PLDU requires only $$n$$ more numbers to store than the original matrix. However, if special care is not taken, the PLDU will not be sparse, even if the original matrix is sparse.
+
+as the determinant of a triangular matrix is just the product of the diagonal. This is indescribably faster than the novel algorithm for computing the determinant which is $$O(n!)$$ and also more stable (assuming we use the PLDU).
+
+### Cholesky Decomposition
+
+The LU decomposition has a best friend: the Cholesky decomposition. The Cholesky decomposition is, on the surface, very similar to the LU decomposition as, much like the LU, it yields a factorization of a matrix $$A$$ into a product of a lower and upper triangular matrix. However, with the Cholesky decomposition the lower triangular matrix is just the transpose of the upper triangular part. The Cholesky decomposition of $$A$$ is given by $$A = R^T R$$. This decomposition exists and is *unique* if $$A$$ is positive definite. If the matrix is positive semidefinite, the decomposition will exist, but it need not be unique. If the matrix is not positive definite/semidefinite then this decomposition will not exist.
+
+The computation of the Cholesky is faster than the LU and does not require pivoting to be stable. Moreover, the Cholesky decomposition computation itself is an efficient method of checking that a matrix is positive definite. I claim this makes a lot of sense. The Cholesky can and should be thought of as a type of square root for matrices. With real numbers, we can only compute the square root of nonnegative numbers. Positive semidefinite matrices are the closest thing matrices have to being "nonnegative," so it makes sense that in order to compute the Cholesky our matrix has to be "nonnegative" as well.
