@@ -17,7 +17,7 @@ So, what is a structure revealing decomposition? Well, the simplest answer is to
 
 Throughout this blog post I will us the following notation and conventions:
 
- - The letters $$i$$, $$j$$, and $$k$$, $$n$$, and $$m$$ will be used exclusively for indexing or to denote the size of matrices.
+ - The letters $$i$$, $$j$$, $$k$$, $$n$$, and $$m$$ will be used exclusively for indexing or to denote the size of matrices.
  - All matrices will be assumed to be real unless otherwise stated, though many if not all of the decompositions will work for complex matrices (if you swap the use of the transpose for the Hermitian transpose).
  - For general matrices, upper case letters near the beginning of the alphabet will be used such as $$A$$, $$B$$, and $$C$$. These matrices are indexed by rows first and then rows. So, to get the element in the $$i$$th row and $$j$$th column it would be written $$A_{ij}$$ and the whole $$i$$th row would be denoted $$A_{i}$$.
  - If the matrix should be thought of as a list of its column vectors, upper case letters near the end of the alphabet will be used such as $$X$$, $$Y$$, and $$Z$$. These matrices are indexed first by columns and then rows. So, to get the element in the $$i$$th row and $$j$$th column it would be written $$X_{ji}$$ and the whole $$j$$th column would be denoted $$A_{j}$$.
@@ -37,3 +37,27 @@ I debated including this at all, but it must be said that a square matrix is oft
 ## Diagonal Matrices
 
 Diagonal matrices are the simplest possible matrices. They need not be square, but they are often square. The defining proerty of a diagonal matrix $$D$$ is that $$D_{ij} = 0$$ if $$i \neq j$$. A diagonal matrix is thus uniquely defined by the values on its main diagonal, and thus we sometimes use the notation $$\mathrm{diag}(x)$$ to denote the diagonal matrix with diagonal $$x$$.
+
+Numerous operations are extremely easy to compute with diagonal matrices. Inverting a diagonal matrix $$D$$, for instance, can be done trivially by just replacing every diagonal element $$d_i$$ with $$1/d_i$$. We will discuss more cases later.
+
+## Triangular Matrices
+
+Triangular matrices come in two flavors: upper triangular and lower triangular. A matrix is upper triangular if $$A_{ij} = 0$$ when $$j > i$$ and lower triangular if $$A_{ij} = 0$$ when $$i > j$$. A matrix is both lower triangular and upper triangular if and only if it is diagonal.
+
+As with diagonal matrices, many matrix operations are much cheaper to compute with a triangular matrix.
+
+## Banded Matrices
+
+Banded matrices can be thought of as a generalization of diagonal matrices where we are allowed to place values on other diagonals. Technically every matrix is "banded" so generally, we want our matrix to have only a small number of bands. An $$n \times n$$ matrix has $$n + 1$$ diagonals. For convenience, we will call the main diagonal the $$0$$th diagonal. The diagonal that starts at $$A_{1i} the $$i-1$$st diagonal and the diagonal that starts at $$A_{i1}$$ is called the $$-i+1$$st diagonal. The $$1$$st and $$-1$$st diagonal are called the super and subdiagonal respectively.
+
+### Tridiagonal Matrices
+
+A commonly used banded matrix is a tridiagonal matrix. This is a matrix that only has nonzero entries on diagonals $$-1$$, $$0$$, and $$1$$. In other words, there are only nonzero entries on the main, sub, and super diagonals of the matrix. Below is such a matrix.
+
+$$
+\begin{pmatrix}
+* & * & 0 \\
+* & * & * \\
+0 & * & *
+\end{pmatrix}.
+$$
