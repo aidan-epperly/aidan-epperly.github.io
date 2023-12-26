@@ -109,12 +109,12 @@ The definition of a sparse matrix is not very specific, but it generally means t
 
 ## Orthogonal Matrices
 
-A matrix $$Q$$ is orthogonal if it satisfies the equality $$Q Q^T = I$$. Equivalently, a matrix is orthogonal if it is square and its columns are orthonormal (orthogonal and norm $$1$$). Orthogonal matrices are extremely easy to invert, which makes them very very useful. They also are *isometries* meaning that they do not change the length of vectors upon application, at least if you use the Euclidean norm. So, if $$Q$$ is an orthoonal matrix then $$\|\|Qx\|\| = \|\|x\|\|$$. If $$X$$ is orthogonal, then the projection of a vector $$y$$ onto $$\mathrm{span}(X)$$ is just given by $$y^T X$$.
+A matrix $$Q$$ is orthogonal if it satisfies the equality $$Q Q^T = I$$. Equivalently, a matrix is orthogonal if it is square and its columns are orthonormal (orthogonal and norm $$1$$). Orthogonal matrices are extremely easy to invert, which makes them very very useful. They also are *isometries* meaning that they do not change the length of vectors upon application, at least if you use the Euclidean norm. So, if $$Q$$ is an orthogonal matrix then $$\|Qx\| = \|x\|$$. If $$X$$ is orthogonal, then the projection of a vector $$y$$ onto $$\mathrm{span}(X)$$ is just given by $$y^T X$$.
 
 Along with the diagonal matrix, orthogonal matrices should be thought of as the gold standard for simple matrices.
 
 ### Householder Reflectors
 
-Suppose we have a vector $$x$$. We can ask the question: does there exist a matrix $$Q$$ such that $$Qx = e_1$$? Well, if $$\|\|x\|\| \neq 1$$ the answer *must* be no as $$Q$$ is an isometry. But, if we revise our question to ask if there is a $$Q$$ mapping $$x$$ to $$\|\|x\|\| e_1$$ then the answer is yes! One such choice of $$Q$$ is the Householder reflector.
+Suppose we have a vector $$x$$. We can ask the question: does there exist a matrix $$Q$$ such that $$Qx = e_1$$? Well, if $$\|x\| \neq 1$$ the answer *must* be no as $$Q$$ is an isometry. But, if we revise our question to ask if there is a $$Q$$ mapping $$x$$ to $$\|x\| e_1$$ then the answer is yes! One such choice of $$Q$$ is the Householder reflector.
 
-The Householder reflector $$H_u$$ is an orthogonal matrix that reflects a vector across the line spanned by the unit vector $$u$$. It is computed using the simple formula $$H_u = I - 2 u u^T$$ where $$u$$ is a unit vector. In order to map the vector $$x$$ to the vector $$y$$ of the same length, we let $$v = \frac{x + y}{2}$$ be the average of the two vectors and then define $$u = \frac{v}{\|\|v\|\|}$$ as the unit vector in the direction of $$v$$. 
+The Householder reflector $$H_u$$ is an orthogonal matrix that reflects a vector across the line spanned by the unit vector $$u$$. It is computed using the simple formula $$H_u = I - 2 u u^T$$ where $$u$$ is a unit vector. In order to map the vector $$x$$ to the vector $$y$$ of the same length, we let $$v = \frac{x + y}{2}$$ be the average of the two vectors and then define $$u = \frac{v}{\|v\|}$$ as the unit vector in the direction of $$v$$. 
