@@ -1,5 +1,5 @@
 ---
-title: "Structure Preserving Decompositions"
+title: "Structure Revealing Decompositions"
 excerpt_separator: "<!--more-->"
 categories:
   - Blog
@@ -7,7 +7,7 @@ permalink: "matdec"
 tags: Linear-Algebra, Polar-Decomposition, QR-Decomposition, Eigen-Decomposition, Spectral-Decomposition, Singular-Value-Decomposition. Jordan-Decomposition
 ---
 
-I expect to spend a lot of time writing about matrices on this blog, and so I wanted to make a single post where I can put all my thoughts on various different structure revealing decompositions for a matrix.
+I expect to spend a lot of time writing about matrices on this blog, and so I wanted to make a single post where I can put all my thoughts on various different structure revealing decompositions for a matrix. This will be a long term project, so it is not, by any means, complete.
 
 ## Structure Revealing Decompositions
 
